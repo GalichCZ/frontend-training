@@ -267,3 +267,26 @@ $accent-color: rgb(0, 255, 55);
         }
     }
 }
+
+.article-form{
+    display: flex;
+    flex-direction: column;
+    label{
+        margin-bottom: 10px;
+    }
+}
+.article-form--head{
+    display: flex;
+    gap: 20px;
+    margin: 2rem 0;
+    align-items: center;
+    h1{
+        font-size: 40px;
+    }
+}
+.article-form--block{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 20px;
+}

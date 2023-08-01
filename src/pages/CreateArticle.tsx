@@ -1,9 +1,9 @@
-import ArticleCreation from "../features/createArticle/components/ArticleCreation";
+import ArticleForm from "../features/createArticle/components/ArticleForm";
 
 const CreateArticle = () => {
   return (
     <section>
-      <ArticleCreation />
+      <ArticleForm />
     </section>
   );
 };

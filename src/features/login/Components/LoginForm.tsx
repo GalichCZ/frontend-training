@@ -6,12 +6,14 @@ const LoginForm = () => {
     <form className="login-form">
       <h3>Log In</h3>
       <TextField
+        id="email-input"
         size="small"
         label="Email"
         placeholder="Email"
         variant="outlined"
       />
       <TextField
+        id="password-input"
         size="small"
         label="Password"
         placeholder="Password"
