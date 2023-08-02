@@ -1,5 +1,4 @@
-import React from "react";
-import { RouteObject, RouteProps } from "react-router-dom";
+import { RouteObject } from "react-router-dom";
 import Article from "../pages/Article";
 import Articles from "../pages/Articles";
 import CreateArticle from "../pages/CreateArticle";

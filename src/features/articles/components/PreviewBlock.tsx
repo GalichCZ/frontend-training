@@ -6,9 +6,9 @@ interface Props {
   imgUrl: string;
   title: string;
   creator: string;
-  date: string;
+  createdAt: Date;
   description: string;
-  comments: number;
+  numOfComs: number;
   articleId: string;
 }
 
@@ -16,9 +16,9 @@ const PreviewBlock: FC<Props> = ({
   imgUrl,
   title,
   creator,
-  date,
+  createdAt,
   description,
-  comments,
+  numOfComs,
   articleId,
 }) => {
   return (
@@ -26,11 +26,11 @@ const PreviewBlock: FC<Props> = ({
       <img src={imgUrl} alt="" />
       <div className="preview-block--info">
         <h4>{title}</h4>
-        <CreatorSpan creator={creator} date={date} />
+        <CreatorSpan creator={creator} date={createdAt} />
         <p>{description}</p>
         <div>
           <Link to={`/article/${articleId}`}>Read whole article</Link>
-          <span>{comments} comments</span>
+          <span>{numOfComs} comments</span>
         </div>
       </div>
     </article>

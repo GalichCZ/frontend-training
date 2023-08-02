@@ -1,18 +1,20 @@
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
 import img from "../../assets/img.png";
+import { IComment } from "../../Types/Comment";
 import CommentStats from "./CommentStats";
 
-const Comment = () => {
+dayjs.extend(relativeTime);
+
+const Comment = ({ comment }: { comment: IComment }) => {
   return (
     <div className="comment-content">
       <img src={img} alt="" />
       <div>
-        <strong>John Reed</strong>
-        <span>2 hours ago</span>
-        <p>
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quos, ipsam
-          ut asperiores autem dolor tempora possimus quas harum vitae. Ab!
-        </p>
-        <CommentStats />
+        <strong>{comment.author}</strong>
+        <span>{dayjs().from(comment.postedAt)}</span>
+        <p>{comment.content}</p>
+        <CommentStats score={comment.score} />
       </div>
     </div>
   );

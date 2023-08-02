@@ -1,11 +1,13 @@
 import React from "react";
+import { IComment } from "../../Types/Comment";
 import Comment from "./Comment";
 
-const Comments = () => {
+const Comments = ({ comments }: { comments: IComment[] }) => {
   return (
     <>
-      <Comment />
-      <Comment />
+      {comments.map((comment) => (
+        <Comment comment={comment} />
+      ))}
     </>
   );
 };

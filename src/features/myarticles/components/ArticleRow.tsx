@@ -3,7 +3,13 @@ import { AiFillDelete } from "react-icons/ai";
 import { FiEdit2 } from "react-icons/fi";
 import { IArticle } from "../../../Types/Article";
 
-const ArticleRow: FC<IArticle> = ({ title, perex, author, numOfComs, id }) => {
+const ArticleRow: FC<IArticle> = ({
+  title,
+  perex,
+  author,
+  numOfComs,
+  articleId,
+}) => {
   return (
     <div className="myarticles-list--row">
       <p>{title}</p>

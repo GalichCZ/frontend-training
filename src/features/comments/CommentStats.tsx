@@ -1,6 +1,6 @@
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 
-const CommentStats = () => {
+const CommentStats = ({ score }: { score: number }) => {
   return (
     <div className="comment-stats">
       <p>+3</p>
