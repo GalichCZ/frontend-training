@@ -1,9 +1,12 @@
 import { FC } from "react";
 import { Link } from "react-router-dom";
+import useGetImage from "../../../hooks/useGetImage";
 import CreatorSpan from "../../../UI/CreatorSpan";
+import Loader from "../../../UI/Loader";
+import { stringCut } from "../../../utils/stringCut";
 
 interface Props {
-  imgUrl: string;
+  imgId: string;
   title: string;
   creator: string;
   createdAt: Date;
@@ -13,7 +16,7 @@ interface Props {
 }
 
 const PreviewBlock: FC<Props> = ({
-  imgUrl,
+  imgId,
   title,
   creator,
   createdAt,
@@ -21,13 +24,14 @@ const PreviewBlock: FC<Props> = ({
   numOfComs,
   articleId,
 }) => {
+  const { imageUrl, loading } = useGetImage(imgId);
   return (
     <article className="preview-block">
-      <img src={imgUrl} alt="" />
+      {!loading ? <img src={imageUrl ?? ""} alt="" /> : <Loader />}
       <div className="preview-block--info">
         <h4>{title}</h4>
         <CreatorSpan creator={creator} date={createdAt} />
-        <p>{description}</p>
+        <p>{stringCut(description, 100)}</p>
         <div>
           <Link to={`/article/${articleId}`}>Read whole article</Link>
           <span>{numOfComs} comments</span>

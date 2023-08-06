@@ -1,17 +1,34 @@
-import React from "react";
+import { FC } from "react";
+import { IArticle } from "../../../Types/Article";
+import SkeletonAsideArticles from "../UI/SkeletonAsideArticles";
 import AsideArticle from "./AsideArticle";
 
-const title = "Lorem, ipsum dolor.";
-const desc =
-  "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum inventore architecto dolorem, id minima libero quia magnam accusamus sint sit.";
+interface Props {
+  isLoading: boolean;
+  articles: IArticle[];
+  mainArticleId: string;
+}
 
-const AsideArticles = () => {
+const AsideArticles: FC<Props> = ({ isLoading, articles, mainArticleId }) => {
+  if (isLoading) {
+    return <SkeletonAsideArticles />;
+  }
+
+  const asideArticles = articles.filter(
+    (article) => article.articleId !== mainArticleId
+  );
+
   return (
     <aside className="article-content--aside">
       <h4>Related articles</h4>
-      <AsideArticle title={title} description={desc} />
-      <AsideArticle title={title} description={desc} />
-      <AsideArticle title={title} description={desc} />
+      {asideArticles.map((article) => (
+        <AsideArticle
+          key={article.articleId}
+          articleId={article.articleId}
+          title={article.title}
+          description={article.perex}
+        />
+      ))}
     </aside>
   );
 };

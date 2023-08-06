@@ -1,6 +1,6 @@
-export const stringCut = (str: string) => {
-  if (str.length > 15) {
-    return str.substring(0, 15) + "...";
+export const stringCut = (str: string, end?: number) => {
+  if (end && str.length > end) {
+    return str.substring(0, end) + "...";
   }
   return str;
 };

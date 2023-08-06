@@ -2,8 +2,10 @@ import { RouteObject } from "react-router-dom";
 import Article from "../pages/Article";
 import Articles from "../pages/Articles";
 import CreateArticle from "../pages/CreateArticle";
+import EditArticle from "../pages/EditArticle";
 import Login from "../pages/Login";
 import MyArticles from "../pages/MyArticles";
+import NotFoundPage from "../pages/NotFoundPage";
 
 export const publicRoutes: RouteObject[] = [
   {
@@ -17,6 +19,10 @@ export const publicRoutes: RouteObject[] = [
   {
     path: "/login",
     element: <Login />,
+  },
+  {
+    path: "*",
+    element: <NotFoundPage />,
   },
 ];
 
@@ -40,5 +46,10 @@ export const authorizedRoutes: RouteObject[] = [
   {
     path: "/create",
     element: <CreateArticle />,
+  },
+  { path: "/edit/:id", element: <EditArticle /> },
+  {
+    path: "*",
+    element: <NotFoundPage />,
   },
 ];

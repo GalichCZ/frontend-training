@@ -1,5 +1,6 @@
 import { useParams } from "react-router-dom";
 import ArticleContent from "../features/article/components/ArticleContent";
+import SkeletonArticle from "../features/article/UI/SkeletonArticle";
 import CommentBlock from "../features/comments/CommentBlock";
 import useGetSpecificArticle from "../hooks/useGetSpecificArticle";
 import NotFound from "../UI/NotFound";
@@ -7,7 +8,11 @@ import NotFound from "../UI/NotFound";
 const Article = () => {
   const { id } = useParams();
 
-  const article = useGetSpecificArticle(id);
+  const { article, loading } = useGetSpecificArticle(id);
+
+  if (loading) {
+    return <SkeletonArticle />;
+  }
 
   return (
     <section className="article-section">
@@ -16,12 +21,13 @@ const Article = () => {
       ) : (
         <div>
           <ArticleContent
+            articleId={article.articleId}
             title={article.title}
             perex={article.perex}
             createdAt={article.createdAt}
             imgId={article.imageId}
           />
-          <CommentBlock comments={article.comments} />
+          <CommentBlock articleId={id ?? ""} comments={article.comments} />
         </div>
       )}
     </section>

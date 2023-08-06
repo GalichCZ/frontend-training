@@ -1,6 +1,8 @@
 import { FC } from "react";
+import useGetImage from "../../../hooks/useGetImage";
 import CreatorSpan from "../../../UI/CreatorSpan";
-import { dateFormat } from "../../../utils/dateFormat";
+import Loader from "../../../UI/Loader";
+import ReactMarkdown from "react-markdown";
 
 interface Props {
   title: string;
@@ -10,16 +12,14 @@ interface Props {
 }
 
 const MainContent: FC<Props> = ({ title, perex, imgId, createdAt }) => {
-  const splittedText = perex.split("\n");
+  const { imageUrl, loading } = useGetImage(imgId);
 
   return (
     <div className="article-content--main">
       <h1>{title}</h1>
       <CreatorSpan creator="John Reed" date={createdAt} />
-      <img src="" alt="" />
-      {splittedText.map((text, key) => (
-        <p key={key}>{text}</p>
-      ))}
+      {!loading ? <img src={imageUrl ?? ""} alt="" /> : <Loader />}
+      <ReactMarkdown>{perex}</ReactMarkdown>
     </div>
   );
 };

@@ -1,29 +1,31 @@
 import PreviewBlock from "./PreviewBlock";
-import { useGetArticlesQuery } from "../../../store/api/articleApi";
-import SkeletonArticle from "../UI/SkeletonArticle";
-import { IArticle } from "../../../Types/Article";
+import SkeletonArticle from "../UI/SkeletonArticles";
+import useGetArticle from "../../../hooks/useGetArticles";
+import { useInView } from "react-intersection-observer";
 import { useEffect, useState } from "react";
 
+//TODO: create fetch on scroll to bottom
+
 const ArticlesContent = () => {
-  const { data, isLoading } = useGetArticlesQuery(0);
-  const [articles, setArticles] = useState<IArticle[]>([]);
+  const [offset, setOffset] = useState(0);
+  const { articles, isLoading, max } = useGetArticle(offset);
+  const { ref, inView } = useInView();
 
   useEffect(() => {
-    if (data) {
-      setArticles(data.items);
+    if (inView && offset < max) {
+      setOffset((val) => val + 5);
     }
-  }, [data]);
+  }, [inView]);
 
   if (isLoading) {
     return <SkeletonArticle />;
   }
-
   return (
     <>
-      {articles.map((article) => (
+      {articles.map((article, key) => (
         <PreviewBlock
-          key={article.articleId}
-          imgUrl=""
+          key={key}
+          imgId={article.imageId}
           title={article.title}
           description={article.perex}
           createdAt={article.createdAt}
@@ -32,6 +34,7 @@ const ArticlesContent = () => {
           creator="John Reed"
         />
       ))}
+      <div ref={ref} className="trigger-block" />
     </>
   );
 };

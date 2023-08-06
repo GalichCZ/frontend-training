@@ -1,46 +1,32 @@
-# Getting Started with Create React App
+How whould I realize the realtime notifications on comments ?
+I'm not sure what was used on BE to create this WS but I'll say it more common, I would subscribe on server action and
+just make my app react on these actions
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+How whould I realize the comments (in case the api does not work)
+classicaly create function that calls the endpoints
+details:
+create interface for dody object
+handle the error:
+if error - show some popup for user with error discription
+else make refetch of comments under post to show new comment
 
-## Available Scripts
+    comment stats:
+      async function(commentId: string, rate:'up'|'down'){
+    	await axios('/comments/${commentId}/vote/${rate}', ...) ...
 
-In the project directory, you can run:
+}
 
-### `npm start`
+Authorization handle: 1. if we don't describe the auth system on back and we just have auth token, jwt, we can store it in local storage 2. all sensetive requests like login/article creation/comment creation will be sent with Bearer in headers 3. pages like article creation will check if the token is fresh via making request to server
+if token is expired logout() redirect()
+else redirect to newly created article
+logout(){
+clear the local storage
+redirect to login page and show popup with error "session expired"
+}
+or for better UX we can not just redirect to login page but show popup with 2 buttons: login go to main page 4. also for better UX we should cache the info in comment section or article creation in case that server returns "session expired"
+so user don't need to write all again, after 200 status we can just clean the cache
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+Article list:
+I've created issue in origibal git repository about how data look like, so in case if we need to show number of comments BE should be little changed, so it returns list of objects,
+Object has pole comments, but there is no need to send all comments, just length of this array, it is possible to make in the DTO, it wont work slow because we have limit on
+how long this list will be

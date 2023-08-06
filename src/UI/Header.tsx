@@ -1,17 +1,25 @@
 import Logo from "./Logo";
 import { Link } from "react-router-dom";
+import useLoggedIn from "../hooks/useLoggedIn";
+import UserHead from "./UserHead";
 
 const Header = () => {
+  const isLoggedIn = useLoggedIn();
+
   return (
     <header className="header">
       <nav>
         <Link to="/">
-          <Logo className="header-logo" />
+          <Logo className="header-logo" data-testid="logo" />
         </Link>
         <Link to="/articles">Recent Articles</Link>
         <Link to="/about">About</Link>
       </nav>
-      <Link to="/login">Log in</Link>
+      {isLoggedIn ? (
+        <UserHead data-testid="user-head" />
+      ) : (
+        <Link to="/login">Log in</Link>
+      )}
     </header>
   );
 };

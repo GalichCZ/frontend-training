@@ -12,14 +12,12 @@ export const getImage = async (imageId: string) => {
       headers,
       responseType: "arraybuffer",
     });
-    console.log(new Blob([response.data]));
     const imageBlob = new Blob([response.data], {
       type: response.headers["content-type"],
     });
     const imageUrl = URL.createObjectURL(imageBlob);
     return imageUrl;
   } catch (error) {
-    console.log(error);
-    return null;
+    return "";
   }
 };

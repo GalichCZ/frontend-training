@@ -1,7 +1,7 @@
 import Stack from "@mui/material/Stack";
 import Skeleton from "@mui/material/Skeleton";
 
-const SkeletonArticle = () => {
+const SkeletonArticles = () => {
   return (
     <Stack spacing={1}>
       <div className="skeleton">
@@ -35,4 +35,4 @@ const SkeletonArticle = () => {
   );
 };
 
-export default SkeletonArticle;
+export default SkeletonArticles;
