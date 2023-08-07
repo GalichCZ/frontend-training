@@ -4,8 +4,8 @@ export const postImage = async (file: File) => {
   const apiUrl = process.env.REACT_APP_API_URL + "/images";
 
   const headers = {
-    Authorization: "Bearer be9ccd82-b61e-4dca-be68-71bbd87cedae",
-    "x-api-key": process.env.REACT_APP_X_API_KEY,
+    Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+    "x-api-key": localStorage.getItem("apiKey"),
     "Content-Type": "multipart/form-data",
   };
 

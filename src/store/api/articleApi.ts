@@ -8,7 +8,7 @@ export const articleApi = createApi({
       headers.set("x-api-key", process.env.REACT_APP_X_API_KEY || "");
       headers.set(
         "Authorization",
-        "Bearer be9ccd82-b61e-4dca-be68-71bbd87cedae"
+        `Bearer ${localStorage.getItem("access_token")}`
       );
     },
   }),

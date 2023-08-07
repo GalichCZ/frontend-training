@@ -3,7 +3,7 @@ import axios from "axios";
 export const getImage = async (imageId: string) => {
   const apiUrl = process.env.REACT_APP_API_URL + `/images/${imageId}`;
   const headers = {
-    "x-api-key": process.env.REACT_APP_X_API_KEY,
+    "x-api-key": localStorage.getItem("apiKey"),
     Accept: "image/*",
   };
 

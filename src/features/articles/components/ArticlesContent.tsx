@@ -3,26 +3,29 @@ import SkeletonArticle from "../UI/SkeletonArticles";
 import useGetArticle from "../../../hooks/useGetArticles";
 import { useInView } from "react-intersection-observer";
 import { useEffect, useState } from "react";
-
+import { sortArticles } from "../../../utils/sortArticles";
 //TODO: create fetch on scroll to bottom
 
 const ArticlesContent = () => {
   const [offset, setOffset] = useState(0);
   const { articles, isLoading, max } = useGetArticle(offset);
   const { ref, inView } = useInView();
+  const lessThanMax = offset < max;
 
   useEffect(() => {
-    if (inView && offset < max) {
+    if (inView && lessThanMax) {
       setOffset((val) => val + 5);
     }
-  }, [inView]);
+  }, [inView, lessThanMax]);
+
+  const sortedArticles = sortArticles(articles, "createdAt");
 
   if (isLoading) {
     return <SkeletonArticle />;
   }
   return (
     <>
-      {articles.map((article, key) => (
+      {sortedArticles.map((article, key) => (
         <PreviewBlock
           key={key}
           imgId={article.imageId}

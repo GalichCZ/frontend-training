@@ -31,6 +31,10 @@ const PreviewBlock: FC<Props> = ({
       <div className="preview-block--info">
         <h4>{title}</h4>
         <CreatorSpan creator={creator} date={createdAt} />
+        {/* 
+          there should be better way to render short part of the article, 
+          the markdown component isn't the best choice for UI
+        */}
         <p>{stringCut(description, 100)}</p>
         <div>
           <Link to={`/article/${articleId}`}>Read whole article</Link>

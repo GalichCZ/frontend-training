@@ -2,14 +2,17 @@ import { Button } from "@mui/material";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import useGetArticle from "../../../hooks/useGetArticles";
-import AdminHead from "../../../UI/AdminHead";
 import { stringCut } from "../../../utils/stringCut";
 import SkeletonRows from "../UI/SkeletonRows";
 import ArticleRow from "./ArticleRow";
 import ArticlesListHead from "./ArticlesListHead";
 
 const MyArticlesList = () => {
-  const [offset, setOffset] = useState(0);
+  //didn't spend time on pagination in this component, because
+  //this component logically should get articles created by user only
+  //I think for that, the BE data interface should be changed
+
+  const [offset] = useState(0);
   const { articles, isLoading } = useGetArticle(offset);
 
   return (

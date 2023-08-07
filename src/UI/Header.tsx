@@ -10,16 +10,12 @@ const Header = () => {
     <header className="header">
       <nav>
         <Link to="/">
-          <Logo className="header-logo" data-testid="logo" />
+          <Logo className="header-logo" />
         </Link>
         <Link to="/articles">Recent Articles</Link>
         <Link to="/about">About</Link>
       </nav>
-      {isLoggedIn ? (
-        <UserHead data-testid="user-head" />
-      ) : (
-        <Link to="/login">Log in</Link>
-      )}
+      {isLoggedIn ? <UserHead /> : <Link to="/login">Log in</Link>}
     </header>
   );
 };
